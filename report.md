@@ -134,35 +134,61 @@
 ## Analysis
 
 First, it should be noted that for *Fig. 1*, CPU Time hits both an upper and lower limit, so when it shows `0.01`, it actually means sub-0.01 and when 500, it means plus-500.
+
 When multiplying smaller (<128 width) matrices, the CPU time clearly beats the GPU time (Fig. 1). The primary reasons for this are:
+
 1. GPUs are optimized for extreme parallelism. A small matrix cannot be split up into worthwhile chunks across many threads, so the GPU regresses performance.
+
 2. Crossing the memory bounds between Host and Device memory likely takes more time than the entire computation itself, so most of the results are initializing the kernel, transferring data, multiplying, and transferring back.
 
-In the professional world, I run into this problem a lot. Typically, I write lots of high-performance WebAssembly libraries and runtimes. The main factor in deciding whether some code is worth running in WebAssembly is exactly the same: if the transfer time exceeds or equals the computation time, then it's likely not beneficial. The same applies to GPUs, which is why we are seeing these results.
+In the professional world, I run into this problem a lot. Typically, I write lots of high-performance WebAssembly libraries and runtimes.
 
-However, when providing the GPU with enough workload so that transfer time < computation time, the handles it perfectly. Taking another look at Fig. 1, the CPU and GPU time intersects at a x-coordinate of around 150. That means that somewhere between a matrix width of 128 and 256, the transfer overhead is superceded by the gpu time (or rather ability to chunk and parallelize data).
+The main factor in deciding whether some code is worth running in WebAssembly is exactly the same: if the transfer time exceeds or equals the computation time, then it's likely not beneficial. The same applies to GPUs, which is why we are seeing these results.
 
-Another reason is WARPs. Even though I'm running a small compatibility layer, SCALE still creates a WARP-equivalent of 32-threads (I looked it up and it's called a wavefront and on my system, it has 32 threads https://youtu.be/uu-3aEyesWQ?t=184). The problem is that both a 2x2 and 4x4 block size cannot fully fill a WARP, which means that they do not fully take advantage of the hardware. Say if I ran this matrix multiplication algorithm with a 4x4 block size, it would only fill half a warp. Now, if I ran it in 8x8 blocks, it would take 64 threads which takes full advantage of two WARPs. If we take a look at the actual data, we find that for 6/10 of the time (with 2 of those 10 being invalid aka negative speedup, so in reality, 6/8), an 8x8 block size outperforms all other runs.
+However, when providing the GPU with enough workload so that transfer time < computation time, the handles it perfectly.
 
-This though, begs the question: if say, I use a block size of 16x16 (8 WARPs), and matrix width of 2048, would it not be faster since it utilizes 8 WARPs simulaneously? In Fig. 1, we see that after a 8x8 block configuration, results sort of plateu, but if we take a look at Fig. 3, we see that the data transfer time nearly triples between 1024 and 2048. In all honesty though, I'm not too certain. My best guess is that the tail section of each computation only uses about half the allocated WARPs which degrades performance. (Do you have any insights into this, professor?)
+Taking another look at Fig. 1, the CPU and GPU time intersects at a x-coordinate of around 150. That means that somewhere between a matrix width of 128 and 256, the transfer overhead is superceded by the gpu time (or rather ability to chunk and parallelize data).
 
-If we take a look at complexity, both the CPU and GPU implementations do the same amount of work, so they run at O(n^3) complexity. The difference is that the GPU is able to distribute that load across thousands of threads. (My system has around 200k threads, so it has plenty of room), so it can effectively spread that complexity and run at a constant rate (which is why we see results plateu at the end). For the GPU, space complexity is also a problem, which seems to increase at rate of something like O(n^2) or so. Again, the GPU is able to compensate for this because it also spreads that O(n^2) complexity across the same threads. Pretty cool. That said, if a large enough matrix isn't provided, both the time and space complexity can't be properly distributed which hurts performance a lot.
+Another reason is WARPs. Even though I'm running a small compatibility layer, SCALE still creates a WARP-equivalent of 32-threads (I looked it up and it's called a wavefront and on my system, it has 32 threads https://youtu.be/uu-3aEyesWQ?t=184). The problem is that both a 2x2 and 4x4 block size cannot fully fill a WARP, which means that they do not fully take advantage of the hardware.
+
+Say if I ran this matrix multiplication algorithm with a 4x4 block size, it would only fill half a warp. Now, if I ran it in 8x8 blocks, it would take 64 threads which takes full advantage of two WARPs. If we take a look at the actual data, we find that for 6/10 of the time (with 2 of those 10 being invalid aka negative speedup, so in reality, 6/8), an 8x8 block size outperforms all other runs.
+
+This though, begs the question: if say, I use a block size of 16x16 (8 WARPs), and matrix width of 2048, would it not be faster since it utilizes 8 WARPs simulaneously?
+
+In Fig. 1, we see that after a 8x8 block configuration, results sort of plateu, but if we take a look at Fig. 3, we see that the data transfer time nearly triples between 1024 and 2048.
+
+In all honesty though, I'm not too certain. My best guess is that the tail section of each computation only uses about half the allocated WARPs which degrades performance. (Do you have any insights into this, professor?)
+
+If we take a look at complexity, both the CPU and GPU implementations do the same amount of work, so they run at O(n^3) complexity.
+
+The difference is that the GPU is able to distribute that load across thousands of threads. (My system has around 200k threads, so it has plenty of room), so it can effectively spread that complexity and run at a constant rate (which is why we see results plateu at the end).
+
+For the GPU, space complexity is also a problem, which seems to increase at rate of something like O(n^2) or so. Again, the GPU is able to compensate for this because it also spreads that O(n^2) complexity across the same threads. Pretty cool.
+
+That said, if a large enough matrix isn't provided, both the time and space complexity can't be properly distributed which hurts performance a lot.
 
 ### Differences between AMD and CUDA results
 
 When comparing SCALE/AMD and CUDA results, I found some noticable differences.
 
 Most obviously, the CPU baselines are very different. For example, we get the following results (Fig 1&5):
+
 Average CPU @ 256x256:
+
 MINE: ~10.4ms
+
 LAB: ~53ms
+
 The CPU in the lab computers is around 5.1x slower.
 
 Or, take this example:
 
 Average CPU @ 2048x2048
+
 MINE: ~39s
+
 CUDA: ~106s
+
 So, ~2.7x slower
 
 The reason that CUDA shows such massive speedups is one because it's running natively, but also that the CPU is much worse.
@@ -185,7 +211,11 @@ CUDA: 5.40
 SCALE: 57.43ms
 CUDA: 25.57ms
 
-In SCALE, the best block size was typically 8x8 and if not that, 16x16. However, in CUDA, that changes and shifts towards 16x16 and if it's a larger matrix, 32x32. If I had a different CUDA GPU to test with, I'm sure we'd see similar results where different GPU generations prefer different block sizes. Not sure if they do it in the wild, but it'd probably be good practice to run GPU code against multiple platforms and choose a good middle ground for block sizes. Say if you hard code a block size value that prefers blackwell architecture, but your user runs pascal, there might be some big problems.
+In SCALE, the best block size was typically 8x8 and if not that, 16x16. However, in CUDA, that changes and shifts towards 16x16 and if it's a larger matrix, 32x32.
+
+If I had a different CUDA GPU to test with, I'm sure we'd see similar results where different GPU generations prefer different block sizes. Not sure if they do it in the wild, but it'd probably be good practice to run GPU code against multiple platforms and choose a good middle ground for block sizes.
+
+Say if you hard code a block size value that prefers blackwell architecture, but your user runs pascal, there might be some big problems.
 
 Oh, also, small block sizes are usually always bad since they can't fill a single WARP. Typically, filling out a warp (aka making sure block size uses multiples of 32 threads) really does help performance.
 

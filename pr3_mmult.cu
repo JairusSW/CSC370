@@ -3,6 +3,7 @@
 // https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/#compiling-cuda-programs
 // https://docs.scale-lang.com/stable/manual/tutorials/how-to-use/#__tabbed_2_2
 // https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html
+// your slides were also helpful
 
 // System includes
 #include <stdio.h>
