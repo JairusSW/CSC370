@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Transfer Time vs GPU Processing Time</text>
+  <text x="550" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15">Block Size 16</text>
+  <text x="550" y="706" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Matrix Width</text>
+  <text x="22" y="344" text-anchor="middle" transform="rotate(-90 22 344)" font-family="Arial, Helvetica, sans-serif" font-size="16">Time (ms)</text>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <line x1="92" y1="616" x2="1056" y2="616" stroke="#111827" />
+    <line x1="92" y1="72" x2="92" y2="616" stroke="#111827" />
+    
+          <line x1="92" y1="616.00" x2="1056" y2="616.00" stroke="#e5e7eb" />
+          <text x="82" y="621.00" text-anchor="end" font-size="13">0</text>
+          <line x1="92" y1="480.00" x2="1056" y2="480.00" stroke="#e5e7eb" />
+          <text x="82" y="485.00" text-anchor="end" font-size="13">3.83</text>
+          <line x1="92" y1="344.00" x2="1056" y2="344.00" stroke="#e5e7eb" />
+          <text x="82" y="349.00" text-anchor="end" font-size="13">7.67</text>
+          <line x1="92" y1="208.00" x2="1056" y2="208.00" stroke="#e5e7eb" />
+          <text x="82" y="213.00" text-anchor="end" font-size="13">11.5</text>
+          <line x1="92" y1="72.00" x2="1056" y2="72.00" stroke="#e5e7eb" />
+          <text x="82" y="77.00" text-anchor="end" font-size="13">15.33</text>
+    <text x="152.25" y="640" text-anchor="middle" font-size="13">16</text><text x="272.75" y="640" text-anchor="middle" font-size="13">32</text><text x="393.25" y="640" text-anchor="middle" font-size="13">64</text><text x="513.75" y="640" text-anchor="middle" font-size="13">128</text><text x="634.25" y="640" text-anchor="middle" font-size="13">256</text><text x="754.75" y="640" text-anchor="middle" font-size="13">512</text><text x="875.25" y="640" text-anchor="middle" font-size="13">1024</text><text x="995.75" y="640" text-anchor="middle" font-size="13">2048</text>
+    <rect x="116.25" y="612.24" width="36.00" height="3.76" fill="#2563eb" /><rect x="236.75" y="612.15" width="36.00" height="3.85" fill="#2563eb" /><rect x="357.25" y="611.49" width="36.00" height="4.51" fill="#2563eb" /><rect x="477.75" y="607.58" width="36.00" height="8.42" fill="#2563eb" /><rect x="598.25" y="600.93" width="36.00" height="15.07" fill="#2563eb" /><rect x="718.75" y="568.35" width="36.00" height="47.65" fill="#2563eb" /><rect x="839.25" y="477.45" width="36.00" height="138.55" fill="#2563eb" /><rect x="959.75" y="112.30" width="36.00" height="503.70" fill="#2563eb" /><rect x="152.25" y="611.45" width="36.00" height="4.55" fill="#16a34a" /><rect x="272.75" y="611.72" width="36.00" height="4.28" fill="#16a34a" /><rect x="393.25" y="611.40" width="36.00" height="4.60" fill="#16a34a" /><rect x="513.75" y="610.69" width="36.00" height="5.31" fill="#16a34a" /><rect x="634.25" y="610.10" width="36.00" height="5.90" fill="#16a34a" /><rect x="754.75" y="605.26" width="36.00" height="10.74" fill="#16a34a" /><rect x="875.25" y="562.84" width="36.00" height="53.16" fill="#16a34a" /><rect x="995.75" y="212.11" width="36.00" height="403.89" fill="#16a34a" />
+    
+        <g>
+          <line x1="92" y1="666" x2="120" y2="666" stroke="#2563eb" stroke-width="4" />
+          <text x="128" y="671" font-size="14">Total Data Transfer Time</text>
+        </g>
+        <g>
+          <line x1="282" y1="666" x2="310" y2="666" stroke="#16a34a" stroke-width="4" />
+          <text x="318" y="671" font-size="14">GPU Processing Time</text>
+        </g>
+  </g>
+</svg>

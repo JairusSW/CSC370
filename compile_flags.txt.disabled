@@ -1,0 +1,16 @@
+-x
+cuda
+-std=c++17
+-nocudainc
+-nocudalib
+-include
+.vscode/clang_cuda_shim.h
+-I/opt/scale/targets/gfx1100/include
+-I/opt/scale/targets/gfx1100/include/redscale_impl/wrappers
+-I/opt/scale/include
+-Wno-unknown-attributes
+-D__CUDACC__
+-D__CUDACC_VER_MAJOR__=12
+-D__CUDACC_VER_MINOR__=9
+-D__CUDACC_VER_BUILD__=999
+-Wno-unused-result

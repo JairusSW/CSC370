@@ -2,8 +2,11 @@
 
 > Note: I'm running a dual AMD 7900XTX setup, so I'm using [SCALE](https://docs.scale-lang.com/stable/) as a compatibility layer for running CUDA on amd gpus. It does have very similar performance compared to raw CUDA (+-5% difference) so hopefully it's fine. Results will probably vary a bit when running raw CUDA, but the overhead is *very* minimal.
 
+> Another Note: I almost forgot S&E was still open. Ran in a few minutes before it closed and *also* ran it on a Nvidia GPU. That being said, there are massive differences in CPU performance, which affect the speedup number. (My CPU is ~200-330% faster)
+
 ## Results
 
+### SCALE/AMD
 | Matrix Width | Block Size | CPU Time (ms) | GPU Total Time (ms) | Total Data Transfer Time (ms) | GPU Processing Time (ms) | Speedup |
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | 2 | 0.000000 | 0.743795 | 0.653344 | 0.090451 | 0.000000 |
@@ -51,6 +54,55 @@
 | 2048 | 16 | 39673.023438 | 57.849400 | 8.109948 | 49.739452 | 685.798340 |
 | 2048 | 32 | 39718.160156 | 57.886402 | 7.978932 | 49.907467 | 686.139709 |
 
+### CUDA/NVIDIA
+| Matrix Width | Block Size | CPU Time (ms) | GPU Total Time (ms) | Total Data Transfer Time (ms) | GPU Processing Time (ms) | Speedup |
+| --- | --- | --- | --- | --- | --- | --- |
+| 4 | 2 | 0.001000 | 868.237793 | 0.577472 | 867.660339 | 0.000001 |
+| 4 | 4 | 0.000000 | 0.238656 | 0.119456 | 0.119200 | 0.000000 |
+| 8 | 2 | 0.001000 | 0.230272 | 0.112448 | 0.117824 | 0.004343 |
+| 8 | 4 | 0.001000 | 0.259584 | 0.135456 | 0.124128 | 0.003852 |
+| 8 | 8 | 0.001000 | 0.231648 | 0.114560 | 0.117088 | 0.004317 |
+| 16 | 2 | 0.009000 | 0.230752 | 0.107680 | 0.123072 | 0.039003 |
+| 16 | 4 | 0.009000 | 0.224928 | 0.103072 | 0.121856 | 0.040013 |
+| 16 | 8 | 0.009000 | 0.237888 | 0.111904 | 0.125984 | 0.037833 |
+| 16 | 16 | 0.009000 | 0.234368 | 0.106048 | 0.128320 | 0.038401 |
+| 32 | 2 | 0.068000 | 0.241760 | 0.113856 | 0.127904 | 0.281271 |
+| 32 | 4 | 0.068000 | 0.237920 | 0.112480 | 0.125440 | 0.285810 |
+| 32 | 8 | 0.068000 | 0.261024 | 0.128928 | 0.132096 | 0.260512 |
+| 32 | 16 | 0.068000 | 0.229184 | 0.108640 | 0.120544 | 0.296705 |
+| 32 | 32 | 0.068000 | 0.273056 | 0.147840 | 0.125216 | 0.249033 |
+| 64 | 2 | 0.546000 | 0.309280 | 0.172096 | 0.137184 | 1.765391 |
+| 64 | 4 | 0.556000 | 0.312128 | 0.171040 | 0.141088 | 1.781320 |
+| 64 | 8 | 0.554000 | 0.244128 | 0.121952 | 0.122176 | 2.269302 |
+| 64 | 16 | 0.547000 | 0.256704 | 0.127200 | 0.129504 | 2.130859 |
+| 64 | 32 | 0.553000 | 0.248768 | 0.122336 | 0.126432 | 2.222955 |
+| 128 | 2 | 5.079000 | 0.336672 | 0.188032 | 0.148640 | 15.085899 |
+| 128 | 4 | 5.072000 | 0.356480 | 0.210752 | 0.145728 | 14.228007 |
+| 128 | 8 | 5.673000 | 0.521024 | 0.345120 | 0.175904 | 10.888174 |
+| 128 | 16 | 5.068000 | 0.387040 | 0.237440 | 0.149600 | 13.094253 |
+| 128 | 32 | 5.052000 | 0.310272 | 0.186528 | 0.123744 | 16.282490 |
+| 256 | 2 | 52.935001 | 0.688320 | 0.396640 | 0.291680 | 76.904640 |
+| 256 | 4 | 53.692001 | 0.599392 | 0.408384 | 0.191008 | 89.577438 |
+| 256 | 8 | 52.514999 | 0.569760 | 0.400576 | 0.169184 | 92.170395 |
+| 256 | 16 | 54.625000 | 0.591072 | 0.424800 | 0.166272 | 92.416832 |
+| 256 | 32 | 51.883999 | 0.666432 | 0.501600 | 0.164832 | 77.853409 |
+| 512 | 2 | 499.231995 | 3.061376 | 1.578944 | 1.482432 | 163.074387 |
+| 512 | 4 | 514.460999 | 2.146816 | 1.512736 | 0.634080 | 239.639069 |
+| 512 | 8 | 517.989990 | 1.692992 | 1.352288 | 0.340704 | 305.961273 |
+| 512 | 16 | 500.317993 | 1.645408 | 1.342816 | 0.302592 | 304.069244 |
+| 512 | 32 | 516.382996 | 1.681056 | 1.365632 | 0.315424 | 307.177734 |
+| 1024 | 2 | 5223.592773 | 15.153408 | 3.932352 | 11.221056 | 344.714050 |
+| 1024 | 4 | 5463.710938 | 7.371808 | 3.958048 | 3.413760 | 741.162964 |
+| 1024 | 8 | 4858.433105 | 5.960064 | 3.959136 | 2.000928 | 815.164612 |
+| 1024 | 16 | 5045.541016 | 5.403072 | 3.904928 | 1.498144 | 933.828125 |
+| 1024 | 32 | 5491.776855 | 5.477056 | 3.980032 | 1.497024 | 1002.687744 |
+| 2048 | 2 | 104186.328125 | 99.369286 | 14.181280 | 85.188004 | 1048.476196 |
+| 2048 | 4 | 111640.070312 | 40.604156 | 14.229888 | 26.374271 | 2749.473877 |
+| 2048 | 8 | 106015.539062 | 28.041344 | 14.865696 | 13.175648 | 3780.686768 |
+| 2048 | 16 | 103000.031250 | 25.579103 | 14.196064 | 11.383040 | 4026.725586 |
+| 2048 | 32 | 104565.484375 | 25.970592 | 14.368672 | 11.601920 | 4026.303467 |
+
+
 ## Graphs
 
 > Charts are generated with Chart.js. If you want that code, let me know
@@ -83,3 +135,5 @@ Another reason is WARPs. Even though I'm running a small compatibility layer, SC
 This though, begs the question: if say, I use a block size of 16x16 (8 WARPs), and matrix width of 2048, would it not be faster since it utilizes 8 WARPs simulaneously? In Fig. 1, we see that after a 8x8 block configuration, results sort of plateu, but if we take a look at Fig. 3, we see that the data transfer time nearly triples between 1024 and 2048. In all honesty though, I'm not too certain. My best guess is that the tail section of each computation only uses about half the allocated WARPs which degrades performance. (Do you have any insights into this, professor?)
 
 If we take a look at complexity, both the CPU and GPU implementations do the same amount of work, so they run at O(n^3) complexity. The difference is that the GPU is able to distribute that load across thousands of threads. (My system has around 200k threads, so it has plenty of room), so it can effectively spread that complexity and run at a constant rate (which is why we see results plateu at the end). For the GPU, space complexity is also a problem, which seems to increase at rate of something like O(n^2) or so. Again, the GPU is able to compensate for this because it also spreads that O(n^2) complexity across the same threads. Pretty cool. That said, if a large enough matrix isn't provided, both the time and space complexity can't be properly distributed which hurts performance a lot.
+
+### Differences between AMD and CUDA results
