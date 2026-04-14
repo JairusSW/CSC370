@@ -1,8 +1,8 @@
 # Report on CUDA Performance
 
-> Note: I'm running a dual AMD 7900XTX setup, so I'm using [SCALE](https://docs.scale-lang.com/stable/) as a compatibility layer for running CUDA on amd gpus. It does have very similar performance compared to raw CUDA (+-5% difference) so hopefully it's fine. Results will probably vary a bit when running raw CUDA, but the overhead is *very* minimal.
+> Note: S&E is closed now so I'm using [SCALE](https://docs.scale-lang.com/stable/) as a compatibility layer for running CUDA on amd gpus. It does have very similar performance compared to raw CUDA (+-5% difference) so hopefully it's fine. Results will probably vary a bit when running raw CUDA, but the overhead is *very* minimal.
 
-> Another Note: I almost forgot S&E was still open. Ran in a few minutes before it closed and *also* ran it on a Nvidia GPU. That being said, there are massive differences in CPU performance, which affect the speedup number. (My CPU is ~200-330% faster)
+> Another Note: I thought S&E was closed but I forgot I can still scan in and ran in a few minutes before it closed and *also* and got results on the Nvidia GPUs. I wrote the first sections of this report based on the SCALE/AMD results. I did however, compare both results from SCALE and CUDA which is interesting. Hope that's okay.
 
 ## Results
 
@@ -107,17 +107,29 @@
 
 > Charts are generated with Chart.js. If you want that code, let me know
 
-**Fig. 1: CPU vs GPU time**
+**Fig. 1 (SCALE/AMD): CPU vs GPU time**
 
-<img src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/cpu-vs-gpu-total-time.svg">
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/scale/cpu-vs-gpu-total-time.svg">
 
-**Fig. 2: Block size vs GPU time**
+**Fig. 2 (SCALE/AMD): Block size vs GPU time**
 
-<img src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/gpu-processing-vs-block-size.svg">
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/scale/gpu-processing-vs-block-size.svg">
 
-**Fig. 3: Transfer vs GPU Time**
+**Fig. 3 (SCALE/AMD): Transfer vs GPU Time**
 
-<img src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/transfer-vs-gpu-processing.svg">
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/scale/transfer-vs-gpu-processing.svg">
+  
+**Fig. 4 (CUDA): CPU vs GPU time**
+
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/cuda/cpu-vs-gpu-total-time.svg">
+
+**Fig. 5 (CUDA): Block size vs GPU time**
+
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/cuda/gpu-processing-vs-block-size.svg">
+
+**Fig. 6 (CUDA): Transfer vs GPU Time**
+
+<img  width=400 src="https://raw.githubusercontent.com/JairusSW/CSC370/refs/heads/master/charts/cuda/transfer-vs-gpu-processing.svg">
   
 ## Analysis
 
@@ -137,3 +149,44 @@ This though, begs the question: if say, I use a block size of 16x16 (8 WARPs), a
 If we take a look at complexity, both the CPU and GPU implementations do the same amount of work, so they run at O(n^3) complexity. The difference is that the GPU is able to distribute that load across thousands of threads. (My system has around 200k threads, so it has plenty of room), so it can effectively spread that complexity and run at a constant rate (which is why we see results plateu at the end). For the GPU, space complexity is also a problem, which seems to increase at rate of something like O(n^2) or so. Again, the GPU is able to compensate for this because it also spreads that O(n^2) complexity across the same threads. Pretty cool. That said, if a large enough matrix isn't provided, both the time and space complexity can't be properly distributed which hurts performance a lot.
 
 ### Differences between AMD and CUDA results
+
+When comparing SCALE/AMD and CUDA results, I found some noticable differences.
+
+Most obviously, the CPU baselines are very different. For example, we get the following results (Fig 1&5):
+Average CPU @ 256x256:
+MINE: ~10.4ms
+LAB: ~53ms
+The CPU in the lab computers is around 5.1x slower.
+
+Or, take this example:
+
+Average CPU @ 2048x2048
+MINE: ~39s
+CUDA: ~106s
+So, ~2.7x slower
+
+The reason that CUDA shows such massive speedups is one because it's running natively, but also that the CPU is much worse.
+
+Secondly, GPU overtakes the CPU at around at around a 64x64 matrix. HOWEVER, the CPU in the lab is very different from mine. If, for example, my cpu was the baseline, it would only become *worse* than the GPU at around a 128x128 matrix.
+
+When looking at the charts, I also saw a noticable outlier (width: 4, block: 2) at 868ms which I suspect is a side effect of the GPU switching from lower wattage to higher or a warmup/optimizing stage.
+
+Probably the best statistic here is comparing CUDA and SCALE kernel times since they are unaffected by the CPU. Granted, SCALE is a runtime, so the GPU code is not running natively, but we still get some interesting results (comparing best results):
+
+512x512:
+SCALE: 1.26ms
+CUDA: 0.31ms
+
+1024x1024:
+SCALE: 7.15ms
+CUDA: 5.40
+
+2048x2048:
+SCALE: 57.43ms
+CUDA: 25.57ms
+
+In SCALE, the best block size was typically 8x8 and if not that, 16x16. However, in CUDA, that changes and shifts towards 16x16 and if it's a larger matrix, 32x32. If I had a different CUDA GPU to test with, I'm sure we'd see similar results where different GPU generations prefer different block sizes. Not sure if they do it in the wild, but it'd probably be good practice to run GPU code against multiple platforms and choose a good middle ground for block sizes. Say if you hard code a block size value that prefers blackwell architecture, but your user runs pascal, there might be some big problems.
+
+Oh, also, small block sizes are usually always bad since they can't fill a single WARP. Typically, filling out a warp (aka making sure block size uses multiples of 32 threads) really does help performance.
+
+Lastly, transfer times in CUDA appear to be a good bit faster for small payloads, but for large payloads, SCALE actually wins even though it's running on a compatibility layer. I suppose transferring between host and device is always costly no matter the hardware, so using shared memory would probably be a big benefit here.
