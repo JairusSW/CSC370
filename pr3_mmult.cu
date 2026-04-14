@@ -1,4 +1,5 @@
 // System includes
+#include ".vscode/clang_cuda_shim.h"
 #include <stdio.h>
 #include <assert.h>
 #include <iostream>
@@ -63,7 +64,41 @@ void matrixMultiplication(int *A, int *B, int *D, int w)
 __global__ void MatrixMulCUDA(int *D, int *A, int *B, int matrixWidth)
 {
     /** TODO: Task 4: Implement a matrix multiplication kernel using global memory **/
-    
+
+    // this is the formula we had on a test a while back
+    int currentRow = blockIdx.y * blockDim.y + threadIdx.y;
+    int currentCol = blockIdx.x * blockDim.x + threadIdx.x;
+
+    // I find it helpful to make a little model whenever doing matrix multiplication or simd stuff
+    // A  0  1  2  3  4    B  0  1  2  3  4
+    // 0 [00, 01, 02, 03, 04]   0 [00, 01, 02, 03, 04]
+    // 1 [05, 06, 07, 08, 09]   1 [05, 06, 07, 08, 09]
+    // 2 [10, 11, 12, 13, 14]   2 [10, 11, 12, 13, 14]
+    // 3 [15, 16, 17, 18, 19]   3 [15, 16, 17, 18, 19]
+    // 4 [20, 21, 22, 23, 24]   4 [20, 21, 22, 23, 24]
+    //
+    // currentRow = 0
+    // currentCol = 0
+    // matrixWidth = 5
+    //
+    // k = 0: a[0]*b[0]
+    // k = 1: a[1]*b[5]
+    // k = 2: a[2]*b[10]
+    // k = 3: a[3]*b[15]
+    // k = 4: a[4]*b[20]
+    // etc...
+    // oh and btw this is just yoinked from the above implementation
+    int sum = 0;
+    for (int k = 0; k < matrixWidth; k++) {
+      int rowIdx = currentRow * matrixWidth + k;
+      int colIdx = k * matrixWidth + currentCol;
+
+      // depending on width, this can def get a speedup from vector/swar instructions
+      sum += A[rowIdx] * B[colIdx];
+    }
+
+    D[currentRow * matrixWidth + currentCol] = sum;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +152,17 @@ int main(int argc, char **argv)
 
     /** TODO: Task 1 - allocate memory on the GPU and copy matrix data to the GPU */
     int *d_A, *d_B, *d_D;
-    
+
+    int matxBytes = matrixSize << 2;
+    cudaMalloc((void **) &d_A, matxBytes);
+    cudaMalloc((void **) &d_B, matxBytes);
+    cudaMalloc((void **) &d_D, matxBytes);
+
+    // next i need to transfer the matrices to the gpu
+    cudaMemcpy(d_A, A, matxBytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, B, matxBytes, cudaMemcpyHostToDevice);
+
+
     /** End Task 1 */
 
     cudaEventRecord(stop);
@@ -125,6 +170,8 @@ int main(int argc, char **argv)
     cudaEventElapsedTime(&h2dTime, start, stop);
 
     /***** TODO: Task 2: Set grid and block sizes for the GPU kernel *****/
+    dim3 gpuBlockSize(blockSize, blockSize);
+    dim3 gpuGridSize(matrixWidth / blockSize, matrixWidth / blockSize); // i'm asusming blockSize | matrixWidth?
 
     /** End Task 2 */
 
@@ -139,7 +186,7 @@ int main(int argc, char **argv)
     cudaEventRecord(start);
 
     /** TODO: Task 5: Retrieve GPU Data into "D" **/
-
+    cudaMemcpy(D, d_D, matxBytes, cudaMemcpyDeviceToHost);
     /** End Task 5 */
 
     cudaEventRecord(stop);
@@ -203,7 +250,15 @@ int main(int argc, char **argv)
     }
 
     /** Task 3 - Free Memory for A, B, C, D */
+    // need to free on gpu and cpu so:
+    free(A);
+    free(B);
+    free(C);
+    free(D);
 
+    cudaFree(d_A);
+    cudaFree(d_B);
+    cudaFree(d_D);
     /** End Task 3 */
 
     return 0;
