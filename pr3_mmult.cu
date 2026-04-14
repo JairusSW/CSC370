@@ -1,5 +1,10 @@
+// Sources:
+// https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/#putting-things-in-actions
+// https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/#compiling-cuda-programs
+// https://docs.scale-lang.com/stable/manual/tutorials/how-to-use/#__tabbed_2_2
+// https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html
+
 // System includes
-#include ".vscode/clang_cuda_shim.h"
 #include <stdio.h>
 #include <assert.h>
 #include <iostream>
@@ -152,6 +157,7 @@ int main(int argc, char **argv)
 
     /** TODO: Task 1 - allocate memory on the GPU and copy matrix data to the GPU */
     int *d_A, *d_B, *d_D;
+    // these are really just a clone of our A,B,D variables. I suppose they're prefixed with d_ for device_A,device_B...
 
     int matxBytes = matrixSize << 2;
     cudaMalloc((void **) &d_A, matxBytes);
@@ -171,7 +177,7 @@ int main(int argc, char **argv)
 
     /***** TODO: Task 2: Set grid and block sizes for the GPU kernel *****/
     dim3 gpuBlockSize(blockSize, blockSize);
-    dim3 gpuGridSize(matrixWidth / blockSize, matrixWidth / blockSize); // i'm asusming blockSize | matrixWidth?
+    dim3 gpuGridSize(matrixWidth / blockSize, matrixWidth / blockSize);
 
     /** End Task 2 */
 
