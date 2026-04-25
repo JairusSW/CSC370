@@ -4,7 +4,9 @@
 // https://docs.scale-lang.com/stable/manual/tutorials/how-to-use/#__tabbed_2_2
 // https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html
 // your slides were also helpful
-
+//
+// https://www.youtube.com/watch?v=ShT7raBPP8k sorry there was some code in here but nothing i didn't see in the book (i pirated it after class today)
+// oh i also looked at slides again
 // System includes
 #include <stdio.h>
 #include <assert.h>
@@ -143,10 +145,10 @@ int main(int argc, char **argv)
     int matrixSize = matrixWidth * matrixWidth;
 
     int *A, *B, *C, *D;
-    A = (int *)malloc(matrixSize * sizeof(int));
-    B = (int *)malloc(matrixSize * sizeof(int));
-    C = (int *)malloc(matrixSize * sizeof(int));
-    D = (int *)malloc(matrixSize * sizeof(int));
+    cudaMallocHost((void **)A, matrixSize * sizeof(int));
+    cudaMallocHost((void **)B, matrixSize * sizeof(int));
+    cudaMallocHost((void **)C, matrixSize * sizeof(int));
+    cudaMallocHost((void **)D, matrixSize * sizeof(int));
 
     initializeMatrices(A, matrixSize);
     initializeMatrices(B, matrixSize);
@@ -258,10 +260,11 @@ int main(int argc, char **argv)
 
     /** Task 3 - Free Memory for A, B, C, D */
     // need to free on gpu and cpu so:
-    free(A);
-    free(B);
-    free(C);
-    free(D);
+    // since i malloced it to host,
+    cudaFreeHost(A);
+    cudaFreeHost(B);
+    cudaFreeHost(C);
+    cudaFreeHost(D);
 
     cudaFree(d_A);
     cudaFree(d_B);
