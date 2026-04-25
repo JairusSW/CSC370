@@ -4,6 +4,8 @@
 // https://docs.scale-lang.com/stable/manual/tutorials/how-to-use/#__tabbed_2_2
 // https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html
 // your slides were also helpful
+//
+// https://www.reddit.com/r/CUDA/comments/1iewfdj/how_is_synchronization_implemented_between_the/
 
 // System includes
 #include <stdio.h>
@@ -143,10 +145,10 @@ int main(int argc, char **argv)
     int matrixSize = matrixWidth * matrixWidth;
 
     int *A, *B, *C, *D;
-    A = (int *)malloc(matrixSize * sizeof(int));
-    B = (int *)malloc(matrixSize * sizeof(int));
-    C = (int *)malloc(matrixSize * sizeof(int));
-    D = (int *)malloc(matrixSize * sizeof(int));
+    cudaMallocManaged(&A, (matrixSize * sizeof(int)));
+    cudaMallocManaged(&B, (matrixSize * sizeof(int)));
+    cudaMallocManaged(&C, (matrixSize * sizeof(int)));
+    cudaMallocManaged(&D, (matrixSize * sizeof(int)));
 
     initializeMatrices(A, matrixSize);
     initializeMatrices(B, matrixSize);
@@ -157,18 +159,13 @@ int main(int argc, char **argv)
     cudaEventRecord(start);
 
     /** TODO: Task 1 - allocate memory on the GPU and copy matrix data to the GPU */
-    int *d_A, *d_B, *d_D;
-    // these are really just a clone of our A,B,D variables. I suppose they're prefixed with d_ for device_A,device_B...
+    // int *d_A, *d_B, *d_D;
+    // // these are really just a clone of our A,B,D variables. I suppose they're prefixed with d_ for device_A,device_B...
+
 
     int matxBytes = matrixSize << 2;
-    cudaMalloc((void **) &d_A, matxBytes);
-    cudaMalloc((void **) &d_B, matxBytes);
-    cudaMalloc((void **) &d_D, matxBytes);
 
-    // next i need to transfer the matrices to the gpu
-    cudaMemcpy(d_A, A, matxBytes, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_B, B, matxBytes, cudaMemcpyHostToDevice);
-
+    // i don't need to malloc and copy here because cuda does that for me since its unified
 
     /** End Task 1 */
 
@@ -185,7 +182,10 @@ int main(int argc, char **argv)
     cudaEventRecord(start);
 
     // Launch the kernel
-    MatrixMulCUDA<<<gpuGridSize, gpuBlockSize>>>(d_D, d_A, d_B, matrixWidth);
+    MatrixMulCUDA<<<gpuGridSize, gpuBlockSize>>>(D, A, B, matrixWidth);
+    // make sure everyone sees a b d
+    //
+    cudaDeviceSynchronize();
 
     cudaEventRecord(stop);
     cudaEventSynchronize(stop);
@@ -193,7 +193,8 @@ int main(int argc, char **argv)
     cudaEventRecord(start);
 
     /** TODO: Task 5: Retrieve GPU Data into "D" **/
-    cudaMemcpy(D, d_D, matxBytes, cudaMemcpyDeviceToHost);
+    // cudaMemcpy(D, d_D, matxBytes, cudaMemcpyDeviceToHost)
+    //  i'm really just removing all references to d_D since we don't need D to be explicitly declared/copied to device since the kernel does that under the hood
     /** End Task 5 */
 
     cudaEventRecord(stop);
@@ -263,9 +264,9 @@ int main(int argc, char **argv)
     free(C);
     free(D);
 
-    cudaFree(d_A);
-    cudaFree(d_B);
-    cudaFree(d_D);
+    // cudaFree(d_A);
+    // cudaFree(d_B);
+    // cudaFree(d_D);
     /** End Task 3 */
 
     return 0;
