@@ -5,10 +5,10 @@ output_file="${1:-results_unified.md}"
 read -r -a widths <<< "${WIDTHS:-4 8 16 32 64 128 256 512 1024 2048}"
 read -r -a block_sizes <<< "${BLOCK_SIZES:-2 4 8 16 32}"
 
-if [ -f /opt/scale/bin/scaleenv ]; then
-    # shellcheck disable=SC1091
-    source /opt/scale/bin/scaleenv gfx1100
-fi
+# if [ -f /opt/scale/bin/scaleenv ]; then
+#     # shellcheck disable=SC1091
+#     source /opt/scale/bin/scaleenv gfx1100
+# fi
 
 nvcc -x cu pr3_mmult.cu -o pr3_mmult
 
