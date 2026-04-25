@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">CPU Time vs GPU Total Time</text>
+  <text x="550" y="706" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Matrix Width</text>
+  <text x="22" y="344" text-anchor="middle" transform="rotate(-90 22 344)" font-family="Arial, Helvetica, sans-serif" font-size="16">Time (ms)</text>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <line x1="92" y1="616" x2="1056" y2="616" stroke="#111827" />
+    <line x1="92" y1="72" x2="92" y2="616" stroke="#111827" />
+    
+          <line x1="92" y1="616.00" x2="1056" y2="616.00" stroke="#e5e7eb" />
+          <text x="82" y="621.00" text-anchor="end" font-size="13">0.01</text>
+          <line x1="92" y1="480.00" x2="1056" y2="480.00" stroke="#e5e7eb" />
+          <text x="82" y="485.00" text-anchor="end" font-size="13">0.15</text>
+          <line x1="92" y1="344.00" x2="1056" y2="344.00" stroke="#e5e7eb" />
+          <text x="82" y="349.00" text-anchor="end" font-size="13">2.24</text>
+          <line x1="92" y1="208.00" x2="1056" y2="208.00" stroke="#e5e7eb" />
+          <text x="82" y="213.00" text-anchor="end" font-size="13">33.44</text>
+          <line x1="92" y1="72.00" x2="1056" y2="72.00" stroke="#e5e7eb" />
+          <text x="82" y="77.00" text-anchor="end" font-size="13">500</text>
+    
+          <line x1="92.00" y1="616" x2="92.00" y2="622" stroke="#111827" />
+          <text x="92.00" y="640" text-anchor="middle" font-size="13">4</text>
+          <line x1="199.11" y1="616" x2="199.11" y2="622" stroke="#111827" />
+          <text x="199.11" y="640" text-anchor="middle" font-size="13">8</text>
+          <line x1="306.22" y1="616" x2="306.22" y2="622" stroke="#111827" />
+          <text x="306.22" y="640" text-anchor="middle" font-size="13">16</text>
+          <line x1="413.33" y1="616" x2="413.33" y2="622" stroke="#111827" />
+          <text x="413.33" y="640" text-anchor="middle" font-size="13">32</text>
+          <line x1="520.44" y1="616" x2="520.44" y2="622" stroke="#111827" />
+          <text x="520.44" y="640" text-anchor="middle" font-size="13">64</text>
+          <line x1="627.56" y1="616" x2="627.56" y2="622" stroke="#111827" />
+          <text x="627.56" y="640" text-anchor="middle" font-size="13">128</text>
+          <line x1="734.67" y1="616" x2="734.67" y2="622" stroke="#111827" />
+          <text x="734.67" y="640" text-anchor="middle" font-size="13">256</text>
+          <line x1="841.78" y1="616" x2="841.78" y2="622" stroke="#111827" />
+          <text x="841.78" y="640" text-anchor="middle" font-size="13">512</text>
+          <line x1="948.89" y1="616" x2="948.89" y2="622" stroke="#111827" />
+          <text x="948.89" y="640" text-anchor="middle" font-size="13">1024</text>
+          <line x1="1056.00" y1="616" x2="1056.00" y2="622" stroke="#111827" />
+          <text x="1056.00" y="640" text-anchor="middle" font-size="13">2048</text>
+    
+          <path d="M 92.00 521.89 L 199.11 537.13 L 306.22 535.08 L 413.33 523.46 L 520.44 474.45 L 627.56 355.24 L 734.67 259.24 L 841.78 118.98 L 948.89 72.00 L 1056.00 72.00" fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="521.89" r="4" fill="#dc2626" /><circle cx="199.11" cy="537.13" r="4" fill="#dc2626" /><circle cx="306.22" cy="535.08" r="4" fill="#dc2626" /><circle cx="413.33" cy="523.46" r="4" fill="#dc2626" /><circle cx="520.44" cy="474.45" r="4" fill="#dc2626" /><circle cx="627.56" cy="355.24" r="4" fill="#dc2626" /><circle cx="734.67" cy="259.24" r="4" fill="#dc2626" /><circle cx="841.78" cy="118.98" r="4" fill="#dc2626" /><circle cx="948.89" cy="72.00" r="4" fill="#dc2626" /><circle cx="1056.00" cy="72.00" r="4" fill="#dc2626" />
+          <path d="M 92.00 451.80 L 199.11 457.11 L 306.22 450.14 L 413.33 444.30 L 520.44 440.84 L 627.56 426.34 L 734.67 385.28 L 841.78 337.10 L 948.89 248.34 L 1056.00 152.13" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="451.80" r="4" fill="#2563eb" /><circle cx="199.11" cy="457.11" r="4" fill="#2563eb" /><circle cx="306.22" cy="450.14" r="4" fill="#2563eb" /><circle cx="413.33" cy="444.30" r="4" fill="#2563eb" /><circle cx="520.44" cy="440.84" r="4" fill="#2563eb" /><circle cx="627.56" cy="426.34" r="4" fill="#2563eb" /><circle cx="734.67" cy="385.28" r="4" fill="#2563eb" /><circle cx="841.78" cy="337.10" r="4" fill="#2563eb" /><circle cx="948.89" cy="248.34" r="4" fill="#2563eb" /><circle cx="1056.00" cy="152.13" r="4" fill="#2563eb" />
+          <path d="M 92.00 453.68 L 199.11 460.06 L 306.22 451.44 L 413.33 446.19 L 520.44 437.38 L 627.56 427.05 L 734.67 393.13 L 841.78 355.25 L 948.89 281.53 L 1056.00 196.51" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="453.68" r="4" fill="#16a34a" /><circle cx="199.11" cy="460.06" r="4" fill="#16a34a" /><circle cx="306.22" cy="451.44" r="4" fill="#16a34a" /><circle cx="413.33" cy="446.19" r="4" fill="#16a34a" /><circle cx="520.44" cy="437.38" r="4" fill="#16a34a" /><circle cx="627.56" cy="427.05" r="4" fill="#16a34a" /><circle cx="734.67" cy="393.13" r="4" fill="#16a34a" /><circle cx="841.78" cy="355.25" r="4" fill="#16a34a" /><circle cx="948.89" cy="281.53" r="4" fill="#16a34a" /><circle cx="1056.00" cy="196.51" r="4" fill="#16a34a" />
+          <path d="M 199.11 453.99 L 306.22 452.22 L 413.33 444.99 L 520.44 440.37 L 627.56 426.95 L 734.67 407.65 L 841.78 360.03 L 948.89 296.88 L 1056.00 220.31" fill="none" stroke="#ea580c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="199.11" cy="453.99" r="4" fill="#ea580c" /><circle cx="306.22" cy="452.22" r="4" fill="#ea580c" /><circle cx="413.33" cy="444.99" r="4" fill="#ea580c" /><circle cx="520.44" cy="440.37" r="4" fill="#ea580c" /><circle cx="627.56" cy="426.95" r="4" fill="#ea580c" /><circle cx="734.67" cy="407.65" r="4" fill="#ea580c" /><circle cx="841.78" cy="360.03" r="4" fill="#ea580c" /><circle cx="948.89" cy="296.88" r="4" fill="#ea580c" /><circle cx="1056.00" cy="220.31" r="4" fill="#ea580c" />
+          <path d="M 306.22 452.64 L 413.33 453.88 L 520.44 451.89 L 627.56 425.46 L 734.67 408.88 L 841.78 362.74 L 948.89 305.60 L 1056.00 223.22" fill="none" stroke="#9333ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="306.22" cy="452.64" r="4" fill="#9333ea" /><circle cx="413.33" cy="453.88" r="4" fill="#9333ea" /><circle cx="520.44" cy="451.89" r="4" fill="#9333ea" /><circle cx="627.56" cy="425.46" r="4" fill="#9333ea" /><circle cx="734.67" cy="408.88" r="4" fill="#9333ea" /><circle cx="841.78" cy="362.74" r="4" fill="#9333ea" /><circle cx="948.89" cy="305.60" r="4" fill="#9333ea" /><circle cx="1056.00" cy="223.22" r="4" fill="#9333ea" />
+          <path d="M 413.33 452.38 L 520.44 449.16 L 627.56 428.85 L 734.67 417.85 L 841.78 369.40 L 948.89 305.56 L 1056.00 230.91" fill="none" stroke="#0891b2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="413.33" cy="452.38" r="4" fill="#0891b2" /><circle cx="520.44" cy="449.16" r="4" fill="#0891b2" /><circle cx="627.56" cy="428.85" r="4" fill="#0891b2" /><circle cx="734.67" cy="417.85" r="4" fill="#0891b2" /><circle cx="841.78" cy="369.40" r="4" fill="#0891b2" /><circle cx="948.89" cy="305.56" r="4" fill="#0891b2" /><circle cx="1056.00" cy="230.91" r="4" fill="#0891b2" />
+    
+        <g>
+          <line x1="92" y1="666" x2="120" y2="666" stroke="#dc2626" stroke-width="4" />
+          <text x="128" y="671" font-size="14">CPU Time</text>
+        </g>
+        <g>
+          <line x1="282" y1="666" x2="310" y2="666" stroke="#2563eb" stroke-width="4" />
+          <text x="318" y="671" font-size="14">GPU Total, Block 2</text>
+        </g>
+        <g>
+          <line x1="472" y1="666" x2="500" y2="666" stroke="#16a34a" stroke-width="4" />
+          <text x="508" y="671" font-size="14">GPU Total, Block 4</text>
+        </g>
+        <g>
+          <line x1="662" y1="666" x2="690" y2="666" stroke="#ea580c" stroke-width="4" />
+          <text x="698" y="671" font-size="14">GPU Total, Block 8</text>
+        </g>
+        <g>
+          <line x1="852" y1="666" x2="880" y2="666" stroke="#9333ea" stroke-width="4" />
+          <text x="888" y="671" font-size="14">GPU Total, Block 16</text>
+        </g>
+        <g>
+          <line x1="92" y1="690" x2="120" y2="690" stroke="#0891b2" stroke-width="4" />
+          <text x="128" y="695" font-size="14">GPU Total, Block 32</text>
+        </g>
+  </g>
+</svg>

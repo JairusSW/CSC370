@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">GPU Processing Time vs Block Size</text>
+  <text x="550" y="706" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Matrix Width</text>
+  <text x="22" y="344" text-anchor="middle" transform="rotate(-90 22 344)" font-family="Arial, Helvetica, sans-serif" font-size="16">GPU Processing Time (ms)</text>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <line x1="92" y1="616" x2="1056" y2="616" stroke="#111827" />
+    <line x1="92" y1="72" x2="92" y2="616" stroke="#111827" />
+    
+          <line x1="92" y1="616.00" x2="1056" y2="616.00" stroke="#e5e7eb" />
+          <text x="82" y="621.00" text-anchor="end" font-size="13">0.51</text>
+          <line x1="92" y1="480.00" x2="1056" y2="480.00" stroke="#e5e7eb" />
+          <text x="82" y="485.00" text-anchor="end" font-size="13">1.93</text>
+          <line x1="92" y1="344.00" x2="1056" y2="344.00" stroke="#e5e7eb" />
+          <text x="82" y="349.00" text-anchor="end" font-size="13">7.22</text>
+          <line x1="92" y1="208.00" x2="1056" y2="208.00" stroke="#e5e7eb" />
+          <text x="82" y="213.00" text-anchor="end" font-size="13">27.09</text>
+          <line x1="92" y1="72.00" x2="1056" y2="72.00" stroke="#e5e7eb" />
+          <text x="82" y="77.00" text-anchor="end" font-size="13">101.58</text>
+    
+          <line x1="92.00" y1="616" x2="92.00" y2="622" stroke="#111827" />
+          <text x="92.00" y="640" text-anchor="middle" font-size="13">2</text>
+          <line x1="333.00" y1="616" x2="333.00" y2="622" stroke="#111827" />
+          <text x="333.00" y="640" text-anchor="middle" font-size="13">4</text>
+          <line x1="574.00" y1="616" x2="574.00" y2="622" stroke="#111827" />
+          <text x="574.00" y="640" text-anchor="middle" font-size="13">8</text>
+          <line x1="815.00" y1="616" x2="815.00" y2="622" stroke="#111827" />
+          <text x="815.00" y="640" text-anchor="middle" font-size="13">16</text>
+          <line x1="1056.00" y1="616" x2="1056.00" y2="622" stroke="#111827" />
+          <text x="1056.00" y="640" text-anchor="middle" font-size="13">32</text>
+    
+          <path d="M 92.00 549.25 L 333.00 565.33 L 574.00 595.08 L 815.00 597.62 L 1056.00 616.00" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="549.25" r="4" fill="#2563eb" /><circle cx="333.00" cy="565.33" r="4" fill="#2563eb" /><circle cx="574.00" cy="595.08" r="4" fill="#2563eb" /><circle cx="815.00" cy="597.62" r="4" fill="#2563eb" /><circle cx="1056.00" cy="616.00" r="4" fill="#2563eb" />
+          <path d="M 92.00 450.57 L 333.00 487.72 L 574.00 497.52 L 815.00 503.06 L 1056.00 516.70" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="450.57" r="4" fill="#16a34a" /><circle cx="333.00" cy="487.72" r="4" fill="#16a34a" /><circle cx="574.00" cy="497.52" r="4" fill="#16a34a" /><circle cx="815.00" cy="503.06" r="4" fill="#16a34a" /><circle cx="1056.00" cy="516.70" r="4" fill="#16a34a" />
+          <path d="M 92.00 268.90 L 333.00 336.83 L 574.00 368.24 L 815.00 386.08 L 1056.00 385.99" fill="none" stroke="#ea580c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="268.90" r="4" fill="#ea580c" /><circle cx="333.00" cy="336.83" r="4" fill="#ea580c" /><circle cx="574.00" cy="368.24" r="4" fill="#ea580c" /><circle cx="815.00" cy="386.08" r="4" fill="#ea580c" /><circle cx="1056.00" cy="385.99" r="4" fill="#ea580c" />
+          <path d="M 92.00 72.00 L 333.00 162.83 L 574.00 211.53 L 815.00 217.48 L 1056.00 233.22" fill="none" stroke="#9333ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="72.00" r="4" fill="#9333ea" /><circle cx="333.00" cy="162.83" r="4" fill="#9333ea" /><circle cx="574.00" cy="211.53" r="4" fill="#9333ea" /><circle cx="815.00" cy="217.48" r="4" fill="#9333ea" /><circle cx="1056.00" cy="233.22" r="4" fill="#9333ea" />
+    
+        <g>
+          <line x1="92" y1="666" x2="120" y2="666" stroke="#2563eb" stroke-width="4" />
+          <text x="128" y="671" font-size="14">Width 256</text>
+        </g>
+        <g>
+          <line x1="282" y1="666" x2="310" y2="666" stroke="#16a34a" stroke-width="4" />
+          <text x="318" y="671" font-size="14">Width 512</text>
+        </g>
+        <g>
+          <line x1="472" y1="666" x2="500" y2="666" stroke="#ea580c" stroke-width="4" />
+          <text x="508" y="671" font-size="14">Width 1024</text>
+        </g>
+        <g>
+          <line x1="662" y1="666" x2="690" y2="666" stroke="#9333ea" stroke-width="4" />
+          <text x="698" y="671" font-size="14">Width 2048</text>
+        </g>
+  </g>
+</svg>

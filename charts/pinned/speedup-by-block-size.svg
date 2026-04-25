@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720">
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <text x="550" y="34" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Speedup by Block Size</text>
+  <text x="550" y="706" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">Matrix Width</text>
+  <text x="22" y="344" text-anchor="middle" transform="rotate(-90 22 344)" font-family="Arial, Helvetica, sans-serif" font-size="16">Speedup</text>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111827">
+    <line x1="92" y1="616" x2="1056" y2="616" stroke="#111827" />
+    <line x1="92" y1="72" x2="92" y2="616" stroke="#111827" />
+    
+          <line x1="92" y1="616.00" x2="1056" y2="616.00" stroke="#e5e7eb" />
+          <text x="82" y="621.00" text-anchor="end" font-size="13">0</text>
+          <line x1="92" y1="480.00" x2="1056" y2="480.00" stroke="#e5e7eb" />
+          <text x="82" y="485.00" text-anchor="end" font-size="13">473.43</text>
+          <line x1="92" y1="344.00" x2="1056" y2="344.00" stroke="#e5e7eb" />
+          <text x="82" y="349.00" text-anchor="end" font-size="13">946.86</text>
+          <line x1="92" y1="208.00" x2="1056" y2="208.00" stroke="#e5e7eb" />
+          <text x="82" y="213.00" text-anchor="end" font-size="13">1.4e+3</text>
+          <line x1="92" y1="72.00" x2="1056" y2="72.00" stroke="#e5e7eb" />
+          <text x="82" y="77.00" text-anchor="end" font-size="13">1.9e+3</text>
+    
+          <line x1="92.00" y1="616" x2="92.00" y2="622" stroke="#111827" />
+          <text x="92.00" y="640" text-anchor="middle" font-size="13">4</text>
+          <line x1="199.11" y1="616" x2="199.11" y2="622" stroke="#111827" />
+          <text x="199.11" y="640" text-anchor="middle" font-size="13">8</text>
+          <line x1="306.22" y1="616" x2="306.22" y2="622" stroke="#111827" />
+          <text x="306.22" y="640" text-anchor="middle" font-size="13">16</text>
+          <line x1="413.33" y1="616" x2="413.33" y2="622" stroke="#111827" />
+          <text x="413.33" y="640" text-anchor="middle" font-size="13">32</text>
+          <line x1="520.44" y1="616" x2="520.44" y2="622" stroke="#111827" />
+          <text x="520.44" y="640" text-anchor="middle" font-size="13">64</text>
+          <line x1="627.56" y1="616" x2="627.56" y2="622" stroke="#111827" />
+          <text x="627.56" y="640" text-anchor="middle" font-size="13">128</text>
+          <line x1="734.67" y1="616" x2="734.67" y2="622" stroke="#111827" />
+          <text x="734.67" y="640" text-anchor="middle" font-size="13">256</text>
+          <line x1="841.78" y1="616" x2="841.78" y2="622" stroke="#111827" />
+          <text x="841.78" y="640" text-anchor="middle" font-size="13">512</text>
+          <line x1="948.89" y1="616" x2="948.89" y2="622" stroke="#111827" />
+          <text x="948.89" y="640" text-anchor="middle" font-size="13">1024</text>
+          <line x1="1056.00" y1="616" x2="1056.00" y2="622" stroke="#111827" />
+          <text x="1056.00" y="640" text-anchor="middle" font-size="13">2048</text>
+    
+          <path d="M 92.00 616.00 L 199.11 616.00 L 306.22 616.00 L 413.33 615.99 L 520.44 615.77 L 627.56 614.50 L 734.67 609.85 L 841.78 595.78 L 948.89 580.93 L 1056.00 485.83" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="616.00" r="4" fill="#2563eb" /><circle cx="199.11" cy="616.00" r="4" fill="#2563eb" /><circle cx="306.22" cy="616.00" r="4" fill="#2563eb" /><circle cx="413.33" cy="615.99" r="4" fill="#2563eb" /><circle cx="520.44" cy="615.77" r="4" fill="#2563eb" /><circle cx="627.56" cy="614.50" r="4" fill="#2563eb" /><circle cx="734.67" cy="609.85" r="4" fill="#2563eb" /><circle cx="841.78" cy="595.78" r="4" fill="#2563eb" /><circle cx="948.89" cy="580.93" r="4" fill="#2563eb" /><circle cx="1056.00" cy="485.83" r="4" fill="#2563eb" />
+          <path d="M 92.00 616.00 L 199.11 616.00 L 306.22 616.00 L 413.33 615.97 L 520.44 615.75 L 627.56 614.39 L 734.67 608.43 L 841.78 586.06 L 948.89 554.89 L 1056.00 299.47" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="92.00" cy="616.00" r="4" fill="#16a34a" /><circle cx="199.11" cy="616.00" r="4" fill="#16a34a" /><circle cx="306.22" cy="616.00" r="4" fill="#16a34a" /><circle cx="413.33" cy="615.97" r="4" fill="#16a34a" /><circle cx="520.44" cy="615.75" r="4" fill="#16a34a" /><circle cx="627.56" cy="614.39" r="4" fill="#16a34a" /><circle cx="734.67" cy="608.43" r="4" fill="#16a34a" /><circle cx="841.78" cy="586.06" r="4" fill="#16a34a" /><circle cx="948.89" cy="554.89" r="4" fill="#16a34a" /><circle cx="1056.00" cy="299.47" r="4" fill="#16a34a" />
+          <path d="M 199.11 616.00 L 306.22 616.00 L 413.33 615.98 L 520.44 615.76 L 627.56 614.43 L 734.67 607.67 L 841.78 581.84 L 948.89 521.62 L 1056.00 160.60" fill="none" stroke="#ea580c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="199.11" cy="616.00" r="4" fill="#ea580c" /><circle cx="306.22" cy="616.00" r="4" fill="#ea580c" /><circle cx="413.33" cy="615.98" r="4" fill="#ea580c" /><circle cx="520.44" cy="615.76" r="4" fill="#ea580c" /><circle cx="627.56" cy="614.43" r="4" fill="#ea580c" /><circle cx="734.67" cy="607.67" r="4" fill="#ea580c" /><circle cx="841.78" cy="581.84" r="4" fill="#ea580c" /><circle cx="948.89" cy="521.62" r="4" fill="#ea580c" /><circle cx="1056.00" cy="160.60" r="4" fill="#ea580c" />
+          <path d="M 306.22 616.00 L 413.33 615.97 L 520.44 615.80 L 627.56 614.41 L 734.67 607.24 L 841.78 583.02 L 948.89 525.93 L 1056.00 112.30" fill="none" stroke="#9333ea" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="306.22" cy="616.00" r="4" fill="#9333ea" /><circle cx="413.33" cy="615.97" r="4" fill="#9333ea" /><circle cx="520.44" cy="615.80" r="4" fill="#9333ea" /><circle cx="627.56" cy="614.41" r="4" fill="#9333ea" /><circle cx="734.67" cy="607.24" r="4" fill="#9333ea" /><circle cx="841.78" cy="583.02" r="4" fill="#9333ea" /><circle cx="948.89" cy="525.93" r="4" fill="#9333ea" /><circle cx="1056.00" cy="112.30" r="4" fill="#9333ea" />
+          <path d="M 413.33 615.97 L 520.44 615.76 L 627.56 614.43 L 734.67 608.81 L 841.78 582.68 L 948.89 524.06 L 1056.00 114.54" fill="none" stroke="#0891b2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="413.33" cy="615.97" r="4" fill="#0891b2" /><circle cx="520.44" cy="615.76" r="4" fill="#0891b2" /><circle cx="627.56" cy="614.43" r="4" fill="#0891b2" /><circle cx="734.67" cy="608.81" r="4" fill="#0891b2" /><circle cx="841.78" cy="582.68" r="4" fill="#0891b2" /><circle cx="948.89" cy="524.06" r="4" fill="#0891b2" /><circle cx="1056.00" cy="114.54" r="4" fill="#0891b2" />
+    
+        <g>
+          <line x1="92" y1="666" x2="120" y2="666" stroke="#2563eb" stroke-width="4" />
+          <text x="128" y="671" font-size="14">Block 2</text>
+        </g>
+        <g>
+          <line x1="282" y1="666" x2="310" y2="666" stroke="#16a34a" stroke-width="4" />
+          <text x="318" y="671" font-size="14">Block 4</text>
+        </g>
+        <g>
+          <line x1="472" y1="666" x2="500" y2="666" stroke="#ea580c" stroke-width="4" />
+          <text x="508" y="671" font-size="14">Block 8</text>
+        </g>
+        <g>
+          <line x1="662" y1="666" x2="690" y2="666" stroke="#9333ea" stroke-width="4" />
+          <text x="698" y="671" font-size="14">Block 16</text>
+        </g>
+        <g>
+          <line x1="852" y1="666" x2="880" y2="666" stroke="#0891b2" stroke-width="4" />
+          <text x="888" y="671" font-size="14">Block 32</text>
+        </g>
+  </g>
+</svg>
