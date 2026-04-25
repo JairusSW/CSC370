@@ -259,10 +259,12 @@ int main(int argc, char **argv)
 
     /** Task 3 - Free Memory for A, B, C, D */
     // need to free on gpu and cpu so:
-    free(A);
-    free(B);
-    free(C);
-    free(D);
+    // oops, forgot to free on both sides. segfault
+    cudaFree(A);
+    cudaFree(B);
+    cudaFree(C);
+    cudaFree(D);
+    // cudaFree worked
 
     // cudaFree(d_A);
     // cudaFree(d_B);
